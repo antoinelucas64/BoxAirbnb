@@ -1,0 +1,16 @@
+## code qui alume le courant:
+# gpio write $GPIO_POWER $ON
+GPIO_POWER=21
+ON=0
+OFF=1
+
+
+# code qui ouvre la serrure
+# gpio write $GPIO_SERRURE $OUVERT
+GPIO_SERRURE=28
+OUVERT=0
+FERME=1
+
+## phone number allowed to send command
+## todo : a list of phone number allowed
+PROPRIO="+336xxxyyyy"
