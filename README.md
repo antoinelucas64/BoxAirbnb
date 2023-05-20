@@ -67,3 +67,14 @@ on commit {
   execute("/script/onDhcpRun.sh", "commit", "","");
 }
 ```
+
+### Add a crontab
+
+Add a crontab like
+```
+@reboot /script/startup.sh
+```
+
+## Configuration
+
+A configuration file have to be adapted (GPIO numbers, allowed phone numbers) in `script/config`

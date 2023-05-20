@@ -47,9 +47,9 @@ retVal=$?
 if [ $retVal -eq 0 ]
 then
     echo "ouvre" >> /var/log/smsbox
-    gpio write ${GPIO_SERRURE} $OUVERT
+    gpio -1 write ${GPIO_SERRURE} $OUVERT
     sleep  10
-    gpio write ${GPIO_SERRURE} $FERME
+    gpio -1 write ${GPIO_SERRURE} $FERME
 fi
 
 grep -i OFF $INBOX/*
@@ -60,7 +60,7 @@ then
     echo "off" >> /var/log/smsbox
     rm ${dir}/ON
     touch ${dir}/OFF
-    gpio write ${GPIO_POWER} $OFF
+    gpio -1 write ${GPIO_POWER} $OFF
 fi
 
 grep -i ON $INBOX/*
@@ -71,7 +71,7 @@ then
     echo "on" >> /var/log/smsbox
     rm ${dir}/OFF
     touch ${dir}/ON
-    gpio write ${GPIO_POWER} $ON
+    gpio -1 write ${GPIO_POWER} $ON
 fi
 
 grep -i REBOOT $INBOX/*

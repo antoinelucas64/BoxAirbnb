@@ -6,7 +6,7 @@ source ${dir}/config
 
 nbArg=$#
   
-value=`gpio read ${GPIO_POWER}`
+value=`gpio -1 read ${GPIO_POWER}`
 
 status="ON"
 if [ $value -eq $OFF ]
