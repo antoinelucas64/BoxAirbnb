@@ -1,13 +1,14 @@
 ## code qui alume le courant:
-# gpio write $GPIO_POWER $ON
-GPIO_POWER=21
+# gpio -1 write $GPIO_POWER $ON
+## GPIO id is physical ID
+GPIO_POWER=12
 ON=0
 OFF=1
 
 
 # code qui ouvre la serrure
 # gpio write $GPIO_SERRURE $OUVERT
-GPIO_SERRURE=28
+GPIO_SERRURE=8
 OUVERT=0
 FERME=1
 
