@@ -17,6 +17,8 @@ Based on gammu software, this allows to start/stop relay, by example to shut dow
 
 With a wifi network set as an access point, dhcp server can monitor when a wifi client as been connected. With this project: it opens a relay that can open a door.
 
+![schema](doc/schema.png "Principe")
+
 ## Hardware Requirement
 
 ### Informatics
@@ -41,18 +43,17 @@ Utility "gpio" like [WiringPi](https://github.com/orangepi-xunlong/wiringOP "Gpi
 
 Copy files in a directory
 
-### Modify gammu configuration file, in `/etc/gammu-smsdrc`, in section `[smsd]` add
+### Modify gammu configuration file
+
+In `/etc/gammu-smsdrc`, in section `[smsd]` add
 
 `RunOnReceive=/script/parseSMS.sh`
 
 ### Set wifi network as an access point
 
 ```
-CON_NAME=Appartement_Antoine
-nmcli con modify $CON_NAME 802-11-wireless.mode ap  802-11-wireless.band bg ipv4.method manual ipv4.addresses "192.168.10.1"
-nmcli con modify $CON_NAME wifi-sec.key-mgmt wpa-psk
-nmcli con modify $CON_NAME wifi-sec.psk password
-nmcli con up $CON_NAME
+nmcli d wifi hotspot ifname wlp1s0 ssid Appartement_XXX password password
+
 ```
 
 ### Modify dhcpd configuration
