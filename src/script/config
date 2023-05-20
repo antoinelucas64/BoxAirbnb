@@ -14,3 +14,11 @@ FERME=1
 ## phone number allowed to send command
 ## todo : a list of phone number allowed
 PROPRIO="+336xxxyyyy"
+ALLOWED="+336xxxyyyy +337xxxyyyy"
+
+
+if [ -z "$INBOX" ]
+then
+   INBOX="/var/spool/gammu/inbox/"
+fi
+

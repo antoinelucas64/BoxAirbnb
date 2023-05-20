@@ -11,7 +11,7 @@ Box Airbnb provides :
 
 ### Domotics by SMS messages
 
-Based on gammu software, this allows to start/stop relay, by example to shut down power of an appartement when no one live there. Shutting down power can in cascade turn off watter by placing an electrovanne in the appartement 
+Based on gammu software, this allows to start/stop relay, by example to shut down power of an apartment when no one live there. Shutting down power can in cascade turn off water by placing an solenoid valve in the apartment 
 
 ### Door opening by selecting a wifi network with correct password
 
