@@ -22,9 +22,19 @@ then
 	exit
 fi
 tel=`ls $INBOX |awk -F"_" '{print $4}' `
-echo $tel | grep "^${PROPRIO}" |grep -v "+338"
-retVal=$?
-if [ $retVal -eq 1 ]
+goodTel=non
+
+for ref in $ALLOWED
+do
+    echo $tel | grep "^${ref}" |grep -v "+338"
+    retVal=$?
+    if [ $retVal -eq 0 ]
+    then
+	goodTel=oui
+    fi
+done
+
+if [ $goodTel == non ]
 then
 	echo "Tel ignored ${tel}" >> /var/log/smsbox 
 	rm $INBOX/*

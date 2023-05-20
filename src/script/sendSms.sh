@@ -20,20 +20,22 @@ PASSWD=`grep -E "^psk" /etc/NetworkManager/system-connections/Hotspot.nmconnecti
 
 MSG="l'appartement est $status (password=${PASSWD}). Commandes: ON, OFF, OUVRE, REBOOT, PASSWORD xxxx. [ ${ladate} ]"
 
-echo "send sms $tel $MSG" >> /var/log/smsbox
+
 
 if [ $nbArg -eq 1 ]
 then
 	tel=$1
    	if [ $tel != $PROPRIO ]
-	then 
-	   	gammu-smsd-inject  TEXT $tel -text "$MSG" &>> /var/log/smsbox
+	then
+	    echo "send sms $tel $MSG" >> /var/log/smsbox
+	    gammu-smsd-inject  TEXT $tel -text "$MSG" &>> /var/log/smsbox
 	fi
 else
     tel=$PROPRIO
 fi
 
-    
+echo "send sms $PROPRIO $MSG" >> /var/log/smsbox
+
 gammu-smsd-inject  TEXT $PROPRIO -text "$MSG" &>> /var/log/smsbox
 
 
