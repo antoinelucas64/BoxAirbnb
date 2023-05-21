@@ -17,13 +17,13 @@ Using the gammu software, this feature allows you to start/stop relays. For exam
 
 By setting up a Wi-Fi network as an access point, the DHCP server can monitor when a Wi-Fi client has connected. With this project, it opens a relay that can open a door.
 
+![schema](doc/schema.png "Principe")
+
 ## Green Technology
 
 Box Airbnb embraces green technology by promoting energy efficiency. Through the domotics features, it allows for intelligent control of power usage in apartments, reducing unnecessary energy consumption when no one is present. This not only helps to save energy but also contributes to a more sustainable environment.
 
 Moreover, the domotics system can also prevent water wastage by addressing potential issues such as leaks. When there are no tenants present, the system can automatically shut off the water supply using solenoid valves, preventing water leaks or any unnecessary water usage. This proactive approach ensures efficient water management, reducing water waste and promoting a greener living environment.
-
-![schema](doc/schema.png "Principe")
 
 ## Hardware Requirements
 
@@ -42,9 +42,7 @@ You will need a Linux system with the following software installed: isc-dhcp-ser
 To install these packages, run the following command:
 
 ```shell
-apt-get install isc-dhcp-server gammu`
-```
-<button onclick="navigator.clipboard.writeText('apt-get install isc-dhcp-server gammu')">Copy code</button>
+apt-get install isc-dhcp-server gammu
 ```
 
 You will also need the "gpio" utility, such as [WiringPi](https://github.com/orangepi-xunlong/wiringOP "Gpio utility")
@@ -63,9 +61,6 @@ In the file `/etc/gammu-smsdrc`, under the `[smsd]` section, add the following l
 
 ```shell
 nmcli d wifi hotspot ifname wlp1s0 ssid Appartement_XXX password password
-
-```
-<button onclick="navigator.clipboard.writeText('nmcli d wifi hotspot ifname wlp1s0 ssid Appartement_XXX password password')">Copy code</button>
 ```
 
 ### Modify the dhcpd configuration
