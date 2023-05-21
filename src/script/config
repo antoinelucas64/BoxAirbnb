@@ -13,11 +13,11 @@ OUVERT=0
 FERME=1
 
 ## phone number allowed to send command
-## todo : a list of phone number allowed
+## proprio:  a sms is always send to proprio when a command has been executed
 PROPRIO="+336xxxyyyy"
 ALLOWED="+336xxxyyyy +337xxxyyyy"
 
-
+## Gammu spool inbox
 if [ -z "$INBOX" ]
 then
    INBOX="/var/spool/gammu/inbox/"

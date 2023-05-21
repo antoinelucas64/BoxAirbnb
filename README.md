@@ -7,56 +7,70 @@
 
 ## Overview
 
-Box Airbnb provides :
+Box Airbnb provides the floowing features:
 
-### Domotics by SMS messages
+### Domotics through SMS messages
 
-Based on gammu software, this allows to start/stop relay, by example to shut down power of an apartment when no one live there. Shutting down power can in cascade turn off water by placing an solenoid valve in the apartment 
+Using the gammu software, this feature allows you to start/stop relays. For example, you can shut down the power of an apartment when no one is living there. Shutting down the power can also trigger the shutdown of water by placing an solenoid valve in the apartment 
 
-### Door opening by selecting a wifi network with correct password
+### Door opening by connecting to a wifi network with the correct password
 
-With a wifi network set as an access point, dhcp server can monitor when a wifi client as been connected. With this project: it opens a relay that can open a door.
+By setting up a Wi-Fi network as an access point, the DHCP server can monitor when a Wi-Fi client has connected. With this project, it opens a relay that can open a door.
+
+## Green Technology
+
+Box Airbnb embraces green technology by promoting energy efficiency. Through the domotics features, it allows for intelligent control of power usage in apartments, reducing unnecessary energy consumption when no one is present. This not only helps to save energy but also contributes to a more sustainable environment.
+
+Moreover, the domotics system can also prevent water wastage by addressing potential issues such as leaks. When there are no tenants present, the system can automatically shut off the water supply using solenoid valves, preventing water leaks or any unnecessary water usage. This proactive approach ensures efficient water management, reducing water waste and promoting a greener living environment.
 
 ![schema](doc/schema.png "Principe")
 
-## Hardware Requirement
+## Hardware Requirements
 
-### Informatics
+### Computer System
 
-Box Airbnb is designed for small Raspberry Pi cards with Wifi & GSM (2G, 3G) capabilities or with USB dongle if CPU cards does not supply wifi and / or GSM.
+Box Airbnb is designed for small Raspberry Pi cards with Wi-Fi and GSM (2G, 3G) capabilities. Alternatively, you can use a USB dongle if your CPU cards does not provide Wi-Fi and/or GSM.
 
 ### Domotics
 
-Some relay, adapted to GPIO 3V & 5V.
+You will need some relays that are compatible with GPIO 3V & 5V. Additionally, dépending on your needs, you may require an electronic locker, an electrovalve.
 
-Dépending on your needs : an electronic locker, an electro-vanne...
+## Software Requirements
 
-## Software requirement
+You will need a Linux system with the following software installed: isc-dhcp-server and gammu.
 
-A linux, with isc-dhcp-server and gammu.
+To install these packages, run the following command:
 
-`apt-get install isc-dhcp-server gammu`
+```shell
+apt-get install isc-dhcp-server gammu`
+```
+<button onclick="navigator.clipboard.writeText('apt-get install isc-dhcp-server gammu')">Copy code</button>
+```
 
-Utility "gpio" like [WiringPi](https://github.com/orangepi-xunlong/wiringOP "Gpio utility")
+You will also need the "gpio" utility, such as [WiringPi](https://github.com/orangepi-xunlong/wiringOP "Gpio utility")
 
 ## Installation
 
-Copy files in a directory
+Copy the files in a directory of your choice.
 
-### Modify gammu configuration file
+### Modify the gammu configuration file
 
-In `/etc/gammu-smsdrc`, in section `[smsd]` add
+In the file `/etc/gammu-smsdrc`, under the `[smsd]` section, add the following line:
 
 `RunOnReceive=/script/parseSMS.sh`
 
 ### Set wifi network as an access point
 
-```
+```shell
 nmcli d wifi hotspot ifname wlp1s0 ssid Appartement_XXX password password
 
 ```
+<button onclick="navigator.clipboard.writeText('nmcli d wifi hotspot ifname wlp1s0 ssid Appartement_XXX password password')">Copy code</button>
+```
 
-### Modify dhcpd configuration
+### Modify the dhcpd configuration
+
+Edit the file `/etc/dhcp/dhcpd.conf` and insert the following lines:
 
 ```
 subnet 192.168.10.0 netmask 255.255.255.0 {
@@ -70,11 +84,12 @@ on commit {
 
 ### Add a crontab
 
-Add a crontab like
-```
+Add the following line to the crontab:
+
+```shell
 @reboot /script/startup.sh
 ```
 
 ## Configuration
 
-A configuration file have to be adapted (GPIO numbers, allowed phone numbers) in `script/config`
+You need to adapt the configuration file located at `script/config`. Modify the GPIO numbers and allowed phone numbers according to your requirements.
