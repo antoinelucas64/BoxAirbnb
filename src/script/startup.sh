@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/bash -e
 
 ## run this script with a @reboot line in crontab, or with /etc/rc.local
 

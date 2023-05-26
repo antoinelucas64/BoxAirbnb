@@ -3,7 +3,7 @@
   <a href="https://www.associés.fr"><img src="doc/logo.png" alt="Antoine & Associés" width="300"></a>
 </h1>
 
-<h4 align="center">Box Airbnb -- domotics with SMS and Wifi</h4>
+<h4 align="center">Box Airbnb - domotics with SMS and Wi-Fi</h4>
 
 ## Overview
 
@@ -42,7 +42,7 @@ You will need a Linux system with the following software installed: isc-dhcp-ser
 To install these packages, run the following command:
 
 ```shell
-apt-get install isc-dhcp-server gammu
+apt-get install isc-dhcp-server gammu dnsmasq
 ```
 
 You will also need the "gpio" utility, such as [WiringPi](https://github.com/orangepi-xunlong/wiringOP "Gpio utility")
@@ -62,6 +62,7 @@ In the file `/etc/gammu-smsdrc`, under the `[smsd]` section, add the following l
 ```shell
 nmcli d wifi hotspot ifname wlp1s0 ssid Appartement_XXX password password
 ```
+Where wlp1s0 is wlan device, can be wlan0 of call ifconfig if no more ideas. 
 
 ### Modify the dhcpd configuration
 
