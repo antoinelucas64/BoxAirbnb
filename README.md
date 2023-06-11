@@ -42,7 +42,7 @@ You will need a Linux system with the following software installed: isc-dhcp-ser
 To install these packages, run the following command:
 
 ```shell
-apt-get install isc-dhcp-server gammu dnsmasq
+apt-get install isc-dhcp-server gammu
 ```
 
 You will also need the "gpio" utility, such as [WiringPi](https://github.com/orangepi-xunlong/wiringOP "Gpio utility")
