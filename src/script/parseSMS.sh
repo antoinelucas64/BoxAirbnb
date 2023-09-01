@@ -1,106 +1,49 @@
+
 #!/bin/bash
+## lecture d'un message
+cd /var/spool/gammu/inbox
 
-dir=`dirname $0`
+## On récupère le numéro de téléphone par le nom du fichier :
+## IN20230610_160718_00_+33612345678_00.txt
+tel=`ls | awk -F"_" '{print $4}' `
 
-ladate=`date`
-source ${dir}/config
-echo "read SMS ${ladate}" >> /var/log/smsbox
+command="Inconnu"
 
-
-if [ ! -d $INBOX ]
-then
-    echo "Configuration Error, check INBOX dir ${INBOX}" >> /var/log/smsbox
-    exit
-fi
-
-
-count=`ls $INBOX | wc -l `
-if [ $count -ne 1 ]
-then
-	echo "multiple messages - ignored" >> /var/log/smsbox
-	rm $INBOX/*
-	exit
-fi
-tel=`ls $INBOX |awk -F"_" '{print $4}' `
-goodTel=non
-
-for ref in $ALLOWED
-do
-    echo $tel | grep "^${ref}" |grep -v "+338"
-    retVal=$?
-    if [ $retVal -eq 0 ]
-    then
-	goodTel=oui
-    fi
-done
-
-if [ $goodTel == non ]
-then
-	echo "Tel ignored ${tel}" >> /var/log/smsbox 
-	rm $INBOX/*
-	exit
-fi
-
-grep -i ouvre $INBOX/*
+grep -i ON *
 retVal=$?
 
-if [ $retVal -eq 0 ]
+if [ $retVal == 0 ]
 then
-    echo "ouvre" >> /var/log/smsbox
-    gpio -1 write ${GPIO_SERRURE} $OUVERT
-    sleep  10
-    gpio -1 write ${GPIO_SERRURE} $FERME
+    command="ON"
+    gpio -1 write 12 1
 fi
 
-grep -i OFF $INBOX/*
+grep -i OFF *
 retVal=$?
 
-if [ $retVal -eq 0 ]
+if [ $retVal == 0 ]
 then
-    echo "off" >> /var/log/smsbox
-    rm ${dir}/ON
-    touch ${dir}/OFF
-    gpio -1 write ${GPIO_POWER} $OFF
+    command="OFF"
+    gpio -1 write 12 0
 fi
-
-grep -i ON $INBOX/*
+ 
+grep -i PASSWORD *
 retVal=$?
 
-if [ $retVal -eq 0 ]
+if [ $retVal == 0 ]
 then
-    echo "on" >> /var/log/smsbox
-    rm ${dir}/OFF
-    touch ${dir}/ON
-    gpio -1 write ${GPIO_POWER} $ON
-fi
-
-grep -i REBOOT $INBOX/*
-retVal=$?
-
-if [ $retVal -eq 0 ]
-then
-    echo "reboot" >> /var/log/smsbox
-    reboot
-    exit
-fi
-
-grep -i password $INBOX/*
-retVal=$?
-if [ $retVal -eq 0 ]
-then
-    echo "change password" >> /var/log/smsbox
-    PASSWD=`awk '{print $2}' ${INBOX}/*`
-    echo $PASSWD >> /var/log/smsbox
-    CON_NAME=Hotspot
+    command="PASSWORD"
+    PASSWD=`awk '{print $2}' * `
+    CON_NAME=hotspot
     
     nmcli con down $CON_NAME
     nmcli con modify $CON_NAME wifi-sec.psk "${PASSWD}"
     nmcli con up $CON_NAME
 fi
 
-${dir}/sendSms.sh $tel
+## suppression du message
+rm *
 
-
-rm $INBOX/*
-
-
+## on envoie le SMS
+msg="Receive message ${command}"
+gammu-smsd-inject TEXT $tel -text "$msg"
