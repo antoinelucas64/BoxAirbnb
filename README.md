@@ -7,6 +7,7 @@
 
 ## Overview
 
+This work has been presented as an atricle in <a href=https://connect.ed-diamond.com/hackable/hk-050>Hackable Magazine</a>.
 Box Airbnb provides the floowing features:
 
 ### Domotics through SMS messages
