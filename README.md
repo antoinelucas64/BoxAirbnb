@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="https://www.associés.fr"><img src="doc/logo.png" alt="Antoine & Associés" width="300"></a>
+  <a href="https://www.associés.fr"><img src="https://raw.githubusercontent.com/antoinelucas64/BoxAirbnb/main/doc/logo.png" alt="Antoine & Associés" width="300"></a>
 </h1>
 
 <h4 align="center">Box Airbnb - domotics with SMS and Wi-Fi</h4>
